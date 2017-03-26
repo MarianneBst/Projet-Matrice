@@ -33,6 +33,18 @@ int main(int argc, char* argv[])
 	
 	MMultCoeff.MATAfficherMatrice();*/
 
+	float c;
+
+	cout << "Saisir une valeur" << endl;
+	cin >> c;
+	cout << "Multiplication par ";
+	cout << c ; cout << endl;
+	/*M2 * c;
+	M2.MATAfficherMatrice();*/
+
+
+
+
 
 
 

@@ -92,9 +92,9 @@ template <typename TypeMatrice>
  CMatrice<TypeMatrice> CMatrice<TypeMatrice>::operator*(float fCoeff)
 {
 	CMatrice<int> MTemp(uiMATNbLignes,uiMATNbColonnes);
-	 MTemp = OPEMultiplicationParCoeff(this,fCoeff);
+	MTemp = COperation<TypeMatrice>::OPEMultiplicationParCoeff(this,fCoeff);
 	 
-	 return MTemp;
+	return MTemp;
 }
 template <typename TypeMatrice>
  CMatrice<TypeMatrice> CMatrice<TypeMatrice>::operator/(float fCoeff)
