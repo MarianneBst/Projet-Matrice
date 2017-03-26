@@ -1,4 +1,5 @@
 #include "CMatrice.h"
+#include "COperations.h"
 
 
 //constructeurs
@@ -90,8 +91,8 @@ void CMatrice<TypeMatrice>::MATModifierElement(TypeMatrice tpmElement, unsigned 
 template <typename TypeMatrice>
  CMatrice<TypeMatrice> CMatrice<TypeMatrice>::operator*(float fCoeff)
 {
-	CMatrice<int> MTemp = new CMatrice<int>(this.MATLireNbLignes,this.MATLireNbColonnes);
-	 MTemp = OPEMultiplicationParCoeff(this,MATParam);
+	CMatrice<int> MTemp(uiMATNbLignes,uiMATNbColonnes);
+	 MTemp = OPEMultiplicationParCoeff(this,fCoeff);
 	 
 	 return MTemp;
 }
@@ -131,15 +132,17 @@ template <typename TypeMatrice>
 	 return MTemp;
  }
 template <typename TypeMatrice>
-CMatrice<TypeMatrice> CMatrice<TypeMatrice>::MATTransposee(CMatrice<TypeMatrice> MATParam)
+CMatrice<TypeMatrice> CMatrice<TypeMatrice>::MATTransposee()
 {
-	CMatrice<int> MTemp = new CMatrice<int>(&MATParam);
-	unsigned int uiLigne;
-	unsigned int uiColonne;
+	//CMatrice<int> * MTemp = new CMatrice<int>(uiMATNbLignes,uiMATNbColonnes);
+	CMatrice<int> MTemp(uiMATNbLignes,uiMATNbColonnes);
+	unsigned int uiLigne,uiColonne;
+	/*unsigned int uiTransLigne=uiMATNbLignes-1;
+	unsigned int uiTransColonne=uiMATNbColonnes-1;*/
 
 	for(uiLigne = 0; uiLigne < uiMATNbLignes; uiLigne++){
 		for(uiColonne=0; uiColonne<uiMATNbColonnes;uiColonne++)
-			MTemp[uiLigne][uiColonne]=pptpmMATMatrice[uiColonne][uiLigne];
+			MTemp.pptpmMATMatrice[uiLigne][uiColonne]=pptpmMATMatrice[uiColonne][uiLigne];
 	}
 
 	return MTemp;

@@ -33,7 +33,7 @@ class CMatrice
 	    CMatrice<TypeMatrice> operator-(CMatrice<TypeMatrice> MATParam);
 		CMatrice<TypeMatrice> operator*(CMatrice<TypeMatrice> MATParam);
 
-		CMatrice<TypeMatrice> MATTransposee(CMatrice<TypeMatrice> MATParam);
+		CMatrice<TypeMatrice> MATTransposee();
 
 };
 
