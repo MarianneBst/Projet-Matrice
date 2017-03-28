@@ -17,25 +17,36 @@ class CMatrice
 	public:
 		//constructeur
 		CMatrice<TypeMatrice>();
-		CMatrice<TypeMatrice>(CMatrice<TypeMatrice>* &objet);
+		CMatrice<TypeMatrice>(CMatrice<TypeMatrice> &objet);
 		CMatrice<TypeMatrice>(unsigned int uiNbLignes, unsigned int uiNbColonnes);
+		//Destructeur
+		~CMatrice();
 		//Getter
-		int MATLireNbLignes();
-		int MATLireNbColonnes();
+		unsigned int MATLireNbLignes();
+		unsigned int MATLireNbColonnes();
 		void MATAfficherMatrice();
+		TypeMatrice MATLireElement(unsigned int uinumLigne, unsigned int uinumColonne);
 		//Setter
 		void MATModifierElement(TypeMatrice tpmElement, unsigned int uinumLigne, unsigned int uinumColonne);
 		//opérations
-		CMatrice<TypeMatrice> operator*(float fCoeff);
-		CMatrice<TypeMatrice> operator/(float fCoeff);
-
-		CMatrice<TypeMatrice> operator+(CMatrice<TypeMatrice> MATParam);
-	    CMatrice<TypeMatrice> operator-(CMatrice<TypeMatrice> MATParam);
-		CMatrice<TypeMatrice> operator*(CMatrice<TypeMatrice> MATParam);
-
+		CMatrice<TypeMatrice> operator=(CMatrice<TypeMatrice>* MATParam);
 		CMatrice<TypeMatrice> MATTransposee();
 
 };
+template <typename TypeMatrice>
+CMatrice<TypeMatrice> operator*(CMatrice<TypeMatrice> MATobjet, TypeMatrice fCoeff);
+
+template <typename TypeMatrice>
+CMatrice<TypeMatrice> operator/(CMatrice<TypeMatrice> MATobjet, TypeMatrice fCoeff);
+
+template <typename TypeMatrice>
+CMatrice<TypeMatrice> operator+(CMatrice<TypeMatrice> MATParamA, CMatrice<TypeMatrice> MATParamB);
+
+template <typename TypeMatrice>
+CMatrice<TypeMatrice> operator-(CMatrice<TypeMatrice> MATParamA, CMatrice<TypeMatrice> MATParamB);
+//
+//template <typename TypeMatrice>
+//CMatrice<TypeMatrice> operator*(CMatrice<TypeMatrice> MATParamA, CMatrice<TypeMatrice> MATParamB);
 
 #include"CMatrice.cpp"
 

@@ -1,6 +1,5 @@
 #include "CMatrice.h"
-#include "COperations.h"
-#include "CException.h"
+#include "COperations.cpp"
 #include <stdio.h>
 
 using namespace std;
@@ -33,14 +32,15 @@ int main(int argc, char* argv[])
 	
 	MMultCoeff.MATAfficherMatrice();*/
 
-	float c;
+	int c;
 
 	cout << "Saisir une valeur" << endl;
 	cin >> c;
 	cout << "Multiplication par ";
 	cout << c ; cout << endl;
-	/*M2 * c;
-	M2.MATAfficherMatrice();*/
+	CMatrice<int> M3(M2 * c);
+	M3.MATAfficherMatrice();
+	M1 = M2 - M3;
 
 
 

@@ -1,8 +1,9 @@
 #include "CMatrice.h"
 #include "COperations.h"
+#include "CException.h"
 
 
-//constructeurs
+/* **********constructeurs **********/
 //par défaut
 template <typename TypeMatrice>
 CMatrice<TypeMatrice>::CMatrice()
@@ -32,7 +33,7 @@ CMatrice<TypeMatrice>::CMatrice(unsigned int uiNbLignes, unsigned int uiNbColonn
 
 //de recopie
 template <typename TypeMatrice>
-CMatrice<TypeMatrice>::CMatrice(CMatrice<TypeMatrice>* &objet){
+CMatrice<TypeMatrice>::CMatrice(CMatrice<TypeMatrice> &objet){
 	unsigned int uiLigne;
 	unsigned int uiColonne;
 
@@ -49,8 +50,19 @@ CMatrice<TypeMatrice>::CMatrice(CMatrice<TypeMatrice>* &objet){
 	
 }
 
+/* ************** Destructeurs **********/
+template <typename TypeMatrice>
+CMatrice<TypeMatrice>::~CMatrice(){
+	unsigned int uiLigne;
 
-//Getter
+	for(uiLigne = 0; uiLigne < uiMATNbLignes; uiLigne++){
+		delete(pptpmMATMatrice[uiLigne]);
+	}
+	delete(pptpmMATMatrice);
+}
+
+
+/* ************Getter *************/
 template <typename TypeMatrice>
 void CMatrice<TypeMatrice>::MATAfficherMatrice()
 {
@@ -67,17 +79,22 @@ void CMatrice<TypeMatrice>::MATAfficherMatrice()
 	}
 }
 template <typename TypeMatrice>
-int CMatrice<TypeMatrice>::MATLireNbLignes()
+unsigned int CMatrice<TypeMatrice>::MATLireNbLignes()
 {
 	return uiMATNbLignes;
 }
 template <typename TypeMatrice>
-int CMatrice<TypeMatrice>::MATLireNbColonnes()
+unsigned int CMatrice<TypeMatrice>::MATLireNbColonnes()
 {
 	return uiMATNbColonnes;
 }
 
-//Setter
+template <typename TypeMatrice>
+TypeMatrice CMatrice<TypeMatrice>::MATLireElement(unsigned int uinumLigne, unsigned int uinumColonne){
+	return pptpmMATMatrice[uiMATNbLignes][uiMATNbColonnes];
+}
+
+/* *************** Setter ************/
 template <typename TypeMatrice>
 void CMatrice<TypeMatrice>::MATModifierElement(TypeMatrice tpmElement, unsigned int uinumLigne, unsigned int uinumColonne){
 	if(uinumLigne == 0 || uinumColonne == 0){
@@ -87,50 +104,75 @@ void CMatrice<TypeMatrice>::MATModifierElement(TypeMatrice tpmElement, unsigned 
 	pptpmMATMatrice[uinumLigne - 1][uinumColonne - 1] = tpmElement;
 }
 
-//Operations
+/* *************Operations **********/
+
+//Surcharge =
 template <typename TypeMatrice>
- CMatrice<TypeMatrice> CMatrice<TypeMatrice>::operator*(float fCoeff)
-{
-	CMatrice<int> MTemp(uiMATNbLignes,uiMATNbColonnes);
-	MTemp = COperation<TypeMatrice>::OPEMultiplicationParCoeff(this,fCoeff);
-	 
-	return MTemp;
-}
-template <typename TypeMatrice>
- CMatrice<TypeMatrice> CMatrice<TypeMatrice>::operator/(float fCoeff)
-{
-	CMatrice<int> MTemp = new CMatrice<int>(this.MATLireNbLignes,this.MATLireNbColonnes);
-	 MTemp = OPEDivisionParCoeff(this,MATParam);
-	 
-	 return MTemp;
+CMatrice<TypeMatrice> CMatrice<TypeMatrice>::operator=(CMatrice<TypeMatrice>* MATParam){
+	unsigned int uiLigne;
+	unsigned int uiColonne;
+	
+	if(uiMATNbLignes != MATParam.MATLireNbLignes() || uiMATNbColonnes != MATParam.MATLireNbColonnes()){
+		CException EXCobjet(2, "Les matrices ne sont pas de même taille");
+		throw EXCobjet;
+	}
+	this = CMatrice<TypeMatrice>(&MATParam);
+
+	return this;
+
 }
 
- template <typename TypeMatrice>
- CMatrice<TypeMatrice> CMatrice<TypeMatrice>::operator+(CMatrice<TypeMatrice> MATParam)
- {
-	 CMatrice<int> MTemp = new CMatrice<int>(MATParam.MATLireNbLignes,MATParam.MATLireNbColonnes);
-	 MTemp = OPEAddition(this,MATParam);
-	 
-	 return MTemp;
- }
+////Surcharge * coeff
+//template <typename TypeMatrice>
+// CMatrice<TypeMatrice> CMatrice<TypeMatrice>::operator*(float fCoeff)
+//{
+//	CMatrice<int>* MTemp = new CMatrice<int>(uiMATNbColonnes,uiMATNbColonnes);
+//	*MTemp = COperation<TypeMatrice>::OPEMultiplicationParCoeff(*this,fCoeff);
+//	 
+//	return MTemp;
+//}
+//
+// //Surcharge / coeff
+//template <typename TypeMatrice>
+// CMatrice<TypeMatrice> CMatrice<TypeMatrice>::operator/(float fCoeff)
+//{
+//	CMatrice<int> MTemp = new CMatrice<int>(this.MATLireNbLignes,this.MATLireNbColonnes);
+//	 MTemp = OPEDivisionParCoeff(this,MATParam);
+//	 
+//	 return MTemp;
+//}
+//
+// //Surcharge +
+// template <typename TypeMatrice>
+// CMatrice<TypeMatrice> CMatrice<TypeMatrice>::operator+(CMatrice<TypeMatrice> MATParam)
+// {
+//	 CMatrice<int> MTemp = new CMatrice<int>(MATParam.MATLireNbLignes,MATParam.MATLireNbColonnes);
+//	 MTemp = OPEAddition(this,MATParam);
+//	 
+//	 return MTemp;
+// }
+//
+// //Surcharge -
+// template <typename TypeMatrice>
+// CMatrice<TypeMatrice> CMatrice<TypeMatrice>::operator-(CMatrice<TypeMatrice> MATParam)
+// {
+//	 CMatrice<int> MTemp = new CMatrice<int>(MATParam.MATLireNbLignesMATParam,MATParam.MATLireNbColonnes);
+//	 MTemp = OPESoustraction(this,MATParam);
+//	 
+//	 return MTemp;
+// }
+//
+// //Surcharge *
+// template <typename TypeMatrice>
+// CMatrice<TypeMatrice> CMatrice<TypeMatrice>::operator*(CMatrice<TypeMatrice> MATParam)
+// {
+//	 CMatrice<int> MTemp = new CMatrice<int>(this.MATLireNbLignes,MATParam.MATLireNbColonnes);
+//	 MTemp = OPEMultiplication(this,MATParam);
+//	 
+//	 return MTemp;
+// }
 
- template <typename TypeMatrice>
- CMatrice<TypeMatrice> CMatrice<TypeMatrice>::operator-(CMatrice<TypeMatrice> MATParam)
- {
-	 CMatrice<int> MTemp = new CMatrice<int>(MATParam.MATLireNbLignesMATParam,MATParam.MATLireNbColonnes);
-	 MTemp = OPESoustraction(this,MATParam);
-	 
-	 return MTemp;
- }
-
- template <typename TypeMatrice>
- CMatrice<TypeMatrice> CMatrice<TypeMatrice>::operator*(CMatrice<TypeMatrice> MATParam)
- {
-	 CMatrice<int> MTemp = new CMatrice<int>(this.MATLireNbLignes,MATParam.MATLireNbColonnes);
-	 MTemp = OPEMultiplication(this,MATParam);
-	 
-	 return MTemp;
- }
+ // Transposée
 template <typename TypeMatrice>
 CMatrice<TypeMatrice> CMatrice<TypeMatrice>::MATTransposee()
 {
