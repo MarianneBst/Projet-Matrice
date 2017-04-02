@@ -33,22 +33,29 @@ class CMatrice
 		CMatrice<TypeMatrice> MATTransposee();
 
 };
-template <typename TypeMatrice>
+template <class TypeMatrice>
 CMatrice<TypeMatrice> operator*(CMatrice<TypeMatrice> MATobjet, TypeMatrice fCoeff);
 
-template <typename TypeMatrice>
+template <class TypeMatrice>
 CMatrice<TypeMatrice> operator/(CMatrice<TypeMatrice> MATobjet, TypeMatrice fCoeff);
 
-template <typename TypeMatrice>
+template <class TypeMatrice>
+CMatrice<TypeMatrice> operator*(TypeMatrice fCoeff, CMatrice<TypeMatrice> MATobjet);
+
+template <class TypeMatrice>
+CMatrice<TypeMatrice> operator/(TypeMatrice fCoeff, CMatrice<TypeMatrice> MATobjet);
+
+template <class TypeMatrice>
 CMatrice<TypeMatrice> operator+(CMatrice<TypeMatrice> MATParamA, CMatrice<TypeMatrice> MATParamB);
 
-template <typename TypeMatrice>
+template <class TypeMatrice>
 CMatrice<TypeMatrice> operator-(CMatrice<TypeMatrice> MATParamA, CMatrice<TypeMatrice> MATParamB);
 //
 //template <typename TypeMatrice>
 //CMatrice<TypeMatrice> operator*(CMatrice<TypeMatrice> MATParamA, CMatrice<TypeMatrice> MATParamB);
 
 #include"CMatrice.cpp"
+#include "COperation.cpp"
 
-#endif PROJETMATRICE_CMATRICE_H
+#endif
 

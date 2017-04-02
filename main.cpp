@@ -1,11 +1,11 @@
 #include "CMatrice.h"
-#include "COperations.cpp"
 #include <stdio.h>
 
 using namespace std;
 
 int main(int argc, char* argv[])
 {
+	//Création des matrice int 3x3 M1 (nulle) et M2 (123456789)
 	cout << "Matrice nulle : " << endl;
 	CMatrice<int> M1(3,3);
 	M1.MATAfficherMatrice();
@@ -20,34 +20,46 @@ int main(int argc, char* argv[])
 	M2.MATModifierElement(7,3,1);
 	M2.MATModifierElement(4,2,1);
 	
-	cout << "Matrice M : " << endl;
+	cout << "Matrice M2 : " << endl;
 	M2.MATAfficherMatrice();
 
 	CMatrice<int> Mt(M2.MATTransposee());
-	cout << "Matrice transposée de M : " << endl;
+	cout << "Matrice transposée de M2 : " << endl;
 	Mt.MATAfficherMatrice();
 
-	/*CMatrice<int> MMultCoeff(M2*2);
-	cout << "Matrice transposée de M : " << endl;
-	
-	MMultCoeff.MATAfficherMatrice();*/
-
+	//début de l'algorythme
 	int c;
-
 	cout << "Saisir une valeur" << endl;
 	cin >> c;
-	cout << "Multiplication par ";
+	cout << "Multiplication de M2 par ";
 	cout << c ; cout << endl;
-	CMatrice<int> M3(M2 * c);
+	CMatrice<int> M3(c * M2);
+	cout << "Matrice M3 " << endl;
 	M3.MATAfficherMatrice();
-	M1 = M2 - M3;
+	cout << "Soustraction de M2 par M3 " << endl;
+	CMatrice<int> M4(M2 - M3);
+	M4.MATAfficherMatrice();
+	cout << "Addition de M2 par M3 " << endl;
+	CMatrice<int> M5(M2 + M3);
+	M5.MATAfficherMatrice();
+	cout << "Division de M2 par ";
+	cout << c ; cout << endl;
+	CMatrice<int> M6(c / M2);
+	cout << "Matrice M6 " << endl;
+	M6.MATAfficherMatrice();
+	CMatrice<int> M7(3,3);
+	M7.MATModifierElement(1,1,1);
+	M7.MATModifierElement(1,2,2);
+	M7.MATModifierElement(1,3,3);
+	cout << "Matrice M7 " << endl;
+	M7.MATAfficherMatrice();
+	cout << "M7 * M2" << endl;
+	CMatrice<int> M8(M7 * M2);
+	M8.MATAfficherMatrice();
+	CMatrice<int> M9(M2 + M3 + M7);
+	M9.MATAfficherMatrice();
 
 
 
-
-
-
-
-	
 	return 0;
 }
