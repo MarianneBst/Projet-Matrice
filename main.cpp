@@ -7,6 +7,7 @@ int main(int argc, char* argv[])
 {
 	//Création des matrice int 3x3 M1 (nulle) et M2 (123456789)
 	cout << "Matrice nulle : " << endl;
+	CMatrice<double> M30();
 	CMatrice<int> M1(3,3);
 	M1.MATAfficherMatrice();
 	CMatrice<int> M2(M1);
@@ -19,6 +20,8 @@ int main(int argc, char* argv[])
 	M2.MATModifierElement(9,3,3);
 	M2.MATModifierElement(7,3,1);
 	M2.MATModifierElement(4,2,1);
+	
+	M1.MATAfficherMatrice();
 	
 	cout << "Matrice M2 : " << endl;
 	M2.MATAfficherMatrice();

@@ -6,13 +6,13 @@
  * Constructeur par défaut 0 arg
  * *******************
  * Entrée : rien
- * Nécessite : néant (?)
+ * Nécessite : néant (?) précondition
  * Sortie : rien
- * Entraine : inititalisation de l'attribut cpEXCmessage
+ * Entraine : inititalisation de l'attribut pcEXCmessage (postcondition)
 **********************/
 Cexception::Cexception()
 {
-	cpEXCmessage = new char[20];
+	pcEXCmessage = new char[20];//pas d'autre manière ?
 }
 
 /*********************
@@ -23,24 +23,26 @@ Cexception::Cexception()
  * Sortie : rien
  * Entraine : inititalisation de l'objet en paramètre
 **********************/
-Cexception::Cexception(Cexception &objet)
+Cexception::Cexception(Cexception &EXCobjet)
 {
-	this->uiEXCValeur = objet.uiEXCValeur;
+	this->uiEXCValeur = EXCobjet.EXCLireErreur();
+	pcEXCmessage = new char[20];
+	strcpy_s(pcEXCmessage, strlen(EXCobjet.EXCLireMessage()) +1, EXCobjet.EXCLireMessage());
 }
 
 /*********************
  * Constructeur de paramètre 2 args
  * *******************
- * Entrée : uiValeur et cpMessage
+ * Entrée : uiValeur et pcMessage
  * Nécessite : néant (?)
  * Sortie : rien
- * Entraine : l'attribut uiEXCValeur et cpEXCmessage prend les valeurs en paramètre
+ * Entraine : l'attribut uiEXCValeur et pcEXCmessage prend les valeurs en paramètre
 **********************/
-Cexception::Cexception(unsigned int uiValeur, char* cpMessage)
+Cexception::Cexception(unsigned int uiValeur, char* pcMessage)
 {
 	uiEXCValeur = uiValeur;
-	strcpy_s(cpEXCmessage, strlen(cpMessage) +1, cpMessage); 
-	//strcpy(cpEXCmessage,cpEXCmessage);
+	strcpy_s(pcEXCmessage, strlen(pcMessage) +1, pcMessage); 
+	//strcpy(pcEXCmessage,pcEXCmessage);
 	
 }
 
@@ -50,11 +52,11 @@ Cexception::Cexception(unsigned int uiValeur, char* cpMessage)
  * Entrée : rien
  * Nécessite : néant (?)
  * Sortie : rien
- * Entraine : supprime l'attribut cpEXCmessage
+ * Entraine : supprime l'attribut pcEXCmessage
 **********************/
 Cexception::~Cexception()
 {
-	delete cpEXCmessage;
+	delete pcEXCmessage;
 }
 
 /*********************
@@ -65,7 +67,7 @@ Cexception::~Cexception()
  * Sortie : l'attribut valeur
  * Entraine :
 **********************/
-unsigned int Cexception::EXCReadError()
+unsigned int Cexception::EXCLireErreur()
 {
 	return uiEXCValeur;
 }
@@ -78,22 +80,22 @@ unsigned int Cexception::EXCReadError()
  * Sortie : l'attribut message
  * Entraine :
 **********************/
-char * Cexception::EXCReadMessage()
+char * Cexception::EXCLireMessage()
 {
-	return cpEXCmessage;
+	return pcEXCmessage;
 }
 
 /*********************
  * Méthode setter message 1 arg
  * *********************
- * Entrée : cpMessage
+ * Entrée : pcMessage
  * Nécessite : néant (?)
  * Sortie : rien
  * Entraine :
 **********************/
-void Cexception::EXCwriteMessage(char* cpMessage)
+void Cexception::EXCEcrireMessage(char* pcMessage)
 {
-    strcpy_s(cpEXCmessage, strlen(cpMessage) + 1, cpMessage);
+    strcpy_s(pcEXCmessage, strlen(pcMessage) + 1, pcMessage);
 }
 
 /*********************
@@ -104,7 +106,7 @@ void Cexception::EXCwriteMessage(char* cpMessage)
  * Sortie : rien
  * Entraine :
 **********************/
-void Cexception::EXCwriteError(unsigned int uiValeur)
+void Cexception::EXCEcrireErreur(unsigned int uiValeur)
 {
 	uiEXCValeur=uiValeur;
 }

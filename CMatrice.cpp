@@ -1,4 +1,5 @@
 #include "CMatrice.h"
+#include "Cexception.h"
 
 
 /* **********constructeurs **********/
@@ -89,13 +90,28 @@ unsigned int CMatrice<TypeMatrice>::MATLireNbColonnes()
 
 template <class TypeMatrice>
 TypeMatrice CMatrice<TypeMatrice>::MATLireElement(unsigned int uinumLigne, unsigned int uinumColonne){
-
+	if(uinumLigne == 0 || uinumColonne == 0){
+		Cexception EXCobjet(0, "Ligne ou colonne 0 inexistante");
+		throw EXCobjet;
+	}
+	if(uinumLigne > uiMATNbLignes || uinumColonne > uiMATNbColonnes){
+		Cexception EXCobjet(1, "Ligne ou colonne hors de la matrice");
+		throw EXCobjet;
+	}
 	return pptpmMATMatrice[uinumLigne - 1][uinumColonne - 1];
 }
 
 /* *************** Setter ************/
 template <class TypeMatrice>
 void CMatrice<TypeMatrice>::MATModifierElement(TypeMatrice tpmElement, unsigned int uinumLigne, unsigned int uinumColonne){
+	if(uinumLigne == 0 || uinumColonne == 0){
+		Cexception EXCobjet(0, "Ligne ou colonne 0 inexistante");
+		throw EXCobjet;
+	}
+	if(uinumLigne > uiMATNbLignes || uinumColonne > uiMATNbColonnes){
+		Cexception EXCobjet(1, "Ligne ou colonne hors de la matrice");
+		throw EXCobjet;
+	}
 	pptpmMATMatrice[uinumLigne - 1][uinumColonne - 1] = tpmElement;
 }
 
@@ -104,12 +120,11 @@ void CMatrice<TypeMatrice>::MATModifierElement(TypeMatrice tpmElement, unsigned 
 //Surcharge =
 template <class TypeMatrice>
 CMatrice<TypeMatrice> CMatrice<TypeMatrice>::operator=(CMatrice<TypeMatrice>* MATParam){
-	unsigned int uiLigne;
-	unsigned int uiColonne;
+	
 
-	this = CMatrice<TypeMatrice>(&MATParam);
+	CMatrice<TypeMatrice> MATnouvelleMatrice(&MATParam);
 
-	return this;
+	return MATnouvelleMatrice;
 
 }
 
@@ -117,11 +132,8 @@ CMatrice<TypeMatrice> CMatrice<TypeMatrice>::operator=(CMatrice<TypeMatrice>* MA
 template <class TypeMatrice>
 CMatrice<TypeMatrice> CMatrice<TypeMatrice>::MATTransposee()
 {
-	//CMatrice<int> * MTemp = new CMatrice<int>(uiMATNbLignes,uiMATNbColonnes);
 	CMatrice<int> MTemp(uiMATNbLignes,uiMATNbColonnes);
 	unsigned int uiLigne,uiColonne;
-	/*unsigned int uiTransLigne=uiMATNbLignes-1;
-	unsigned int uiTransColonne=uiMATNbColonnes-1;*/
 
 	for(uiLigne = 0; uiLigne < uiMATNbLignes; uiLigne++){
 		for(uiColonne=0; uiColonne<uiMATNbColonnes;uiColonne++)
