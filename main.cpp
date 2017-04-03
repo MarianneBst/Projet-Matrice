@@ -1,4 +1,10 @@
 #include "CMatrice.h"
+<<<<<<< HEAD
+#include "COperations.h"
+#include "CException.h"
+#include "CParser.h"
+=======
+>>>>>>> 0f7588f5cdce74bbb1210af8660928313df55c25
 #include <stdio.h>
 
 using namespace std;
@@ -30,12 +36,11 @@ int main(int argc, char* argv[])
 	cout << "Matrice transposée de M2 : " << endl;
 	Mt.MATAfficherMatrice();
 
-	//début de l'algorythme
-	int c;
-	cout << "Saisir une valeur" << endl;
-	cin >> c;
-	cout << "Multiplication de M2 par ";
-	cout << c ; cout << endl;
+	CParser P1;
+	P1.PARLireFichier("test1.txt");
+	cout << "Test 1 : Good" <<endl;
+	free(P1.getPpdPARMatrice());
+
 	CMatrice<int> M3(c * M2);
 	cout << "Matrice M3 " << endl;
 	M3.MATAfficherMatrice();
@@ -61,8 +66,6 @@ int main(int argc, char* argv[])
 	M8.MATAfficherMatrice();
 	CMatrice<int> M9(M2 + M3 + M7);
 	M9.MATAfficherMatrice();
-
-
 
 	return 0;
 }

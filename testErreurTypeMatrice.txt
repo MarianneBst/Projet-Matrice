@@ -1,0 +1,8 @@
+TypeMatrice = int
+nblignes=3
+nbcolonnes=3
+matrice=[
+2 3 4
+5 6 7
+8 9 0
+]
