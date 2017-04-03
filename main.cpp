@@ -1,6 +1,7 @@
 #include "CMatrice.h"
 #include "COperations.h"
 #include "CException.h"
+#include "CParser.h"
 #include <stdio.h>
 
 using namespace std;
@@ -33,21 +34,18 @@ int main(int argc, char* argv[])
 	
 	MMultCoeff.MATAfficherMatrice();*/
 
-	float c;
+	//float c;
+	CParser P1;
+	P1.PARLireFichier("test1.txt");
+	cout << "Test 1 : Good" <<endl;
+	free(P1.getPpdPARMatrice());
 
-	cout << "Saisir une valeur" << endl;
+	/*cout << "Saisir une valeur" << endl;
 	cin >> c;
 	cout << "Multiplication par ";
 	cout << c ; cout << endl;
-	/*M2 * c;
+	M2 * c;
 	M2.MATAfficherMatrice();*/
-
-
-
-
-
-
-
 	
 	return 0;
 }

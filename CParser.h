@@ -5,8 +5,19 @@
 
 class CParser
 {
+private:
+	unsigned int uiPARNbColonnes;
+	unsigned int uiPARNbLignes;
+	double** ppdPARMatrice;
 public:
-	double** PARLireFichier(char* sPath);
+	CParser();
+	~CParser();
+	void PARLireFichier(char* pcPath);
+	void PARupperString(char* pcString);
+	unsigned int getUiPARNbColonnes();
+	unsigned int getUiPARNbLignes();
+	double** getPpdPARMatrice();
 
+	
 };
-#endif
+#endif C_PARSER_H
