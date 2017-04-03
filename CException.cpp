@@ -1,4 +1,4 @@
-#include "CException.h"
+#include "Cexception.h"
 #include <string.h>
 
 
@@ -10,7 +10,7 @@
  * Sortie : rien
  * Entraine : inititalisation de l'attribut cpEXCmessage
 **********************/
-CException::CException()
+Cexception::Cexception()
 {
 	cpEXCmessage = new char[20];
 }
@@ -23,7 +23,7 @@ CException::CException()
  * Sortie : rien
  * Entraine : inititalisation de l'objet en paramètre
 **********************/
-CException::CException(CException &objet)
+Cexception::Cexception(Cexception &objet)
 {
 	this->uiEXCValeur = objet.uiEXCValeur;
 }
@@ -36,7 +36,7 @@ CException::CException(CException &objet)
  * Sortie : rien
  * Entraine : l'attribut uiEXCValeur et cpEXCmessage prend les valeurs en paramètre
 **********************/
-CException::CException(unsigned int uiValeur, char* cpMessage)
+Cexception::Cexception(unsigned int uiValeur, char* cpMessage)
 {
 	uiEXCValeur = uiValeur;
 	strcpy_s(cpEXCmessage, strlen(cpMessage) +1, cpMessage); 
@@ -52,7 +52,7 @@ CException::CException(unsigned int uiValeur, char* cpMessage)
  * Sortie : rien
  * Entraine : supprime l'attribut cpEXCmessage
 **********************/
-CException::~CException()
+Cexception::~Cexception()
 {
 	delete cpEXCmessage;
 }
@@ -65,7 +65,7 @@ CException::~CException()
  * Sortie : l'attribut valeur
  * Entraine :
 **********************/
-unsigned int CException::EXCReadError()
+unsigned int Cexception::EXCReadError()
 {
 	return uiEXCValeur;
 }
@@ -78,7 +78,7 @@ unsigned int CException::EXCReadError()
  * Sortie : l'attribut message
  * Entraine :
 **********************/
-char * CException::EXCReadMessage()
+char * Cexception::EXCReadMessage()
 {
 	return cpEXCmessage;
 }
@@ -91,7 +91,7 @@ char * CException::EXCReadMessage()
  * Sortie : rien
  * Entraine :
 **********************/
-void CException::EXCwriteMessage(char* cpMessage)
+void Cexception::EXCwriteMessage(char* cpMessage)
 {
     strcpy_s(cpEXCmessage, strlen(cpMessage) + 1, cpMessage);
 }
@@ -104,7 +104,7 @@ void CException::EXCwriteMessage(char* cpMessage)
  * Sortie : rien
  * Entraine :
 **********************/
-void CException::EXCwriteError(unsigned int uiValeur)
+void Cexception::EXCwriteError(unsigned int uiValeur)
 {
 	uiEXCValeur=uiValeur;
 }
