@@ -73,9 +73,9 @@ CMatrice<TypeMatrice>::~CMatrice(){
 	unsigned int uiLigne;
 
 	for(uiLigne = 0; uiLigne < uiMATNbLignes; uiLigne++){
-		delete(pptpmMATMatrice[uiLigne]);
+		delete[](pptpmMATMatrice[uiLigne]);
 	}
-	delete(pptpmMATMatrice);
+	delete[](pptpmMATMatrice);
 }
 
 
@@ -136,17 +136,35 @@ void CMatrice<TypeMatrice>::MATModifierElement(TypeMatrice tpmElement, unsigned 
 /* *************Operations **********/
 
  // Transposée
-template <class TypeMatrice>
-CMatrice<TypeMatrice> CMatrice<TypeMatrice>::MATTransposee()
-{
-	CMatrice<int> MTemp(uiMATNbLignes,uiMATNbColonnes);
-	unsigned int uiLigne,uiColonne;
+//template <class TypeMatrice>
+//CMatrice<TypeMatrice> CMatrice<TypeMatrice>::MATTransposee()
+//{
+//	CMatrice<TypeMatrice> MTemp(uiMATNbLignes,uiMATNbColonnes);
+//	unsigned int uiLigne,uiColonne;
+//
+//	for(uiLigne = 1; uiLigne <= uiMATNbLignes; uiLigne++){
+//		for(uiColonne = 1; uiColonne <= uiMATNbColonnes;uiColonne++)
+//			MTemp.MATModifierElement(pptpmMATMatrice[uiColonne][uiLigne], uiLigne, uiColonne);
+//	}
+//
+//	return MTemp;
+//}
 
-	for(uiLigne = 0; uiLigne < uiMATNbLignes; uiLigne++){
-		for(uiColonne=0; uiColonne<uiMATNbColonnes;uiColonne++)
-			MTemp.pptpmMATMatrice[uiLigne][uiColonne]=pptpmMATMatrice[uiColonne][uiLigne];
+// surcharge du =
+template <typename TypeMatrice>
+void CMatrice<TypeMatrice>::operator=(CMatrice<TypeMatrice> &MATParam){
+	unsigned int uiLigne;
+	unsigned int uiColonne;
+	
+	if(uiMATNbLignes != MATParam.MATLireNbLignes() || uiMATNbColonnes != MATParam.MATLireNbColonnes()){
+		Cexception EXCobjet(2, "Les matrices ne sont pas de même taille");
+		throw EXCobjet;
 	}
 
-	return MTemp;
+	for(uiLigne = 1; uiLigne <= uiMATNbLignes; uiLigne++){
+		for(uiColonne = 1; uiColonne <= uiMATNbColonnes;uiColonne++){
+			MATModifierElement(MATParam.MATLireElement(uiLigne,uiColonne), uiLigne, uiColonne);
+		}
+	}
+	
 }
-

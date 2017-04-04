@@ -123,7 +123,9 @@ class CMatrice
  * Sortie : la matrice transposée
  * Postcondition : rien
 **********************/
-		CMatrice<TypeMatrice> MATTransposee();
+		/*CMatrice<TypeMatrice> MATTransposee();*/
+
+		void operator=(CMatrice<TypeMatrice> &MATParam);
 
 };
 /*********************
@@ -202,6 +204,7 @@ CMatrice<TypeMatrice> operator-(CMatrice<TypeMatrice> MATParamA, CMatrice<TypeMa
 **********************/
 template <typename TypeMatrice>
 CMatrice<TypeMatrice> operator*(CMatrice<TypeMatrice> MATParamA, CMatrice<TypeMatrice> MATParamB);
+
 
 #include"CMatrice.cpp"
 #include "COperation.cpp"
