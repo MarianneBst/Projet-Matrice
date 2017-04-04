@@ -48,8 +48,26 @@ CMatrice<TypeMatrice>::CMatrice(CMatrice<TypeMatrice> &MATobjet){
 	}
 	
 }
+//Parser
+template <class TypeMatrice>
+CMatrice<TypeMatrice>::CMatrice(CParser &PARObjet)
+{
+	unsigned int uiLigne;
+	unsigned int uiColonne;
 
-/* ************** Destructeurs **********/
+	uiMATNbColonnes = PARObjet.getUiPARNbColonnes();
+	uiMATNbLignes = PARObjet.getUiPARNbLignes();
+	
+	pptpmMATMatrice = new TypeMatrice* [PARObjet.getUiPARNbLignes()];
+	for(uiLigne = 0; uiLigne < PARObjet.getUiPARNbLignes(); uiLigne++){
+		pptpmMATMatrice[uiLigne] = new TypeMatrice[PARObjet.getUiPARNbColonnes()];
+		for(uiColonne = 0; uiColonne < PARObjet.getUiPARNbColonnes(); uiColonne++){
+			pptpmMATMatrice[uiLigne][uiColonne] = PARObjet.getPpdPARMatrice()[uiLigne][uiColonne];
+		}
+	}
+}
+
+/* ************** Destructeur **********/
 template <class TypeMatrice>
 CMatrice<TypeMatrice>::~CMatrice(){
 	unsigned int uiLigne;
