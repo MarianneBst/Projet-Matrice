@@ -32,18 +32,18 @@ CMatrice<TypeMatrice>::CMatrice(unsigned int uiNbLignes, unsigned int uiNbColonn
 
 //de recopie
 template <class TypeMatrice>
-CMatrice<TypeMatrice>::CMatrice(CMatrice<TypeMatrice> &objet){
+CMatrice<TypeMatrice>::CMatrice(CMatrice<TypeMatrice> &MATobjet){
 	unsigned int uiLigne;
 	unsigned int uiColonne;
 
-	uiMATNbColonnes = objet.uiMATNbColonnes;
-	uiMATNbLignes = objet.uiMATNbLignes;
+	uiMATNbColonnes = MATobjet.uiMATNbColonnes;
+	uiMATNbLignes = MATobjet.uiMATNbLignes;
 	
-	pptpmMATMatrice = new TypeMatrice* [objet.uiMATNbLignes];
-	for(uiLigne = 0; uiLigne < objet.uiMATNbLignes; uiLigne++){
-		pptpmMATMatrice[uiLigne] = new TypeMatrice[objet.uiMATNbColonnes];
-		for(uiColonne = 0; uiColonne < objet.uiMATNbColonnes; uiColonne++){
-			pptpmMATMatrice[uiLigne][uiColonne] = objet.pptpmMATMatrice[uiLigne][uiColonne];
+	pptpmMATMatrice = new TypeMatrice* [MATobjet.uiMATNbLignes];
+	for(uiLigne = 0; uiLigne < MATobjet.uiMATNbLignes; uiLigne++){
+		pptpmMATMatrice[uiLigne] = new TypeMatrice[MATobjet.uiMATNbColonnes];
+		for(uiColonne = 0; uiColonne < MATobjet.uiMATNbColonnes; uiColonne++){
+			pptpmMATMatrice[uiLigne][uiColonne] = MATobjet.pptpmMATMatrice[uiLigne][uiColonne];
 		}
 	}
 	
@@ -116,17 +116,6 @@ void CMatrice<TypeMatrice>::MATModifierElement(TypeMatrice tpmElement, unsigned 
 }
 
 /* *************Operations **********/
-
-//Surcharge =
-template <class TypeMatrice>
-CMatrice<TypeMatrice> CMatrice<TypeMatrice>::operator=(CMatrice<TypeMatrice>* MATParam){
-	
-
-	CMatrice<TypeMatrice> MATnouvelleMatrice(&MATParam);
-
-	return MATnouvelleMatrice;
-
-}
 
  // Transposée
 template <class TypeMatrice>

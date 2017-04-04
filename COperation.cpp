@@ -1,11 +1,18 @@
 #include "CMatrice.h"
 
-/* préconditions pour la taille des matrices */ 
+/*********************
+ * Surcharge de l'opérateur + 2 arg
+ * *******************
+ * Entrée : deux matrices
+ * Précondition : il faut que les matrices soient de même dimensions
+ * Sortie : objet de la classe CMatrice
+ * Postcondition : rien
+**********************/
 template <class TypeMatrice>
 CMatrice<TypeMatrice> operator+(CMatrice<TypeMatrice> MATParamA, CMatrice<TypeMatrice> MATParamB)
 {
-	if(MATParamA.MATLireNbColonnes() != MATParamB.MATLireNbLignes()){
-		Cexception EXCobjet(2, "Multiplication des matrices impossible");
+	if(MATParamA.MATLireNbLignes() != MATParamB.MATLireNbLignes() && MATParamA.MATLireNbColonnes() != MATParamB.MATLireNbColonnes()){
+		Cexception EXCobjet(2, "Addition des matrices impossible");
 		throw EXCobjet;
 	}
 	CMatrice<int> MTemp(MATParamA.MATLireNbLignes(),MATParamA.MATLireNbColonnes());
@@ -24,6 +31,14 @@ CMatrice<TypeMatrice> operator+(CMatrice<TypeMatrice> MATParamA, CMatrice<TypeMa
 	return MTemp;
 }
 
+/*********************
+ * Surcharge de l'opérateur - 2 arg
+ * *******************
+ * Entrée : deux matrices
+ * Précondition : il faut que les matrices soient de même dimensions
+ * Sortie : objet de la classe CMatrice
+ * Postcondition : rien
+**********************/
 template <class TypeMatrice>
 CMatrice<TypeMatrice> operator-(CMatrice<TypeMatrice> MATParamA, CMatrice<TypeMatrice> MATParamB)
 {
@@ -31,6 +46,11 @@ CMatrice<TypeMatrice> operator-(CMatrice<TypeMatrice> MATParamA, CMatrice<TypeMa
 	CMatrice<int> MTemp(MATParamA.MATLireNbLignes(),MATParamA.MATLireNbColonnes());
 	unsigned int uiCptColonnes;
 	unsigned int uiCptLignes;
+
+	if(MATParamA.MATLireNbLignes() != MATParamB.MATLireNbLignes() && MATParamA.MATLireNbColonnes() != MATParamB.MATLireNbColonnes()){
+		Cexception EXCobjet(2, "Soustraction des matrices impossible");
+		throw EXCobjet;
+	}
 	
 	try{
 
@@ -46,6 +66,14 @@ CMatrice<TypeMatrice> operator-(CMatrice<TypeMatrice> MATParamA, CMatrice<TypeMa
 	return MTemp;
 }
 
+/*********************
+ * Surcharge de l'opérateur * 2 arg
+ * *******************
+ * Entrée : deux matrices
+ * Précondition : il faut que le nombre de colonnes de la matrice A soit égal au nombre de lignes de la matrice B
+ * Sortie : objet de la classe CMatrice
+ * Postcondition : rien
+**********************/
 template <class TypeMatrice>
 CMatrice<TypeMatrice> operator*(CMatrice<TypeMatrice> MATParamA, CMatrice<TypeMatrice> MATParamB)
 {
@@ -54,6 +82,11 @@ CMatrice<TypeMatrice> operator*(CMatrice<TypeMatrice> MATParamA, CMatrice<TypeMa
 	unsigned int uiCptSommes;
 	TypeMatrice tpmSomme;
 	CMatrice<int> MTemp(MATParamA.MATLireNbLignes(),MATParamB.MATLireNbColonnes());
+
+	if(MATParamA.MATLireNbColonnes() != MATParamB.MATLireNbLignes()){
+		Cexception EXCobjet(2, "Multiplication des matrices impossible");
+		throw EXCobjet;
+	}
 	
 	try{
 		for(uiCptLignes = 1; uiCptLignes <= MATParamA.MATLireNbLignes(); uiCptLignes++)
@@ -76,8 +109,16 @@ CMatrice<TypeMatrice> operator*(CMatrice<TypeMatrice> MATParamA, CMatrice<TypeMa
 	return MTemp;
 }
 
+/*********************
+ * Surcharge de l'opérateur * 2 arg
+ * *******************
+ * Entrée : une matrice et un coefficient
+ * Précondition : le coefficient doit être de Type Matrice
+ * Sortie : objet de la classe CMatrice
+ * Postcondition : rien
+**********************/
 template <class TypeMatrice>
-CMatrice<TypeMatrice> operator*(CMatrice<TypeMatrice> MATobjet, TypeMatrice fCoeff)
+CMatrice<TypeMatrice> operator*(CMatrice<TypeMatrice> MATobjet, TypeMatrice tpmCoeff)
 {
 	unsigned int uiLigne;
 	unsigned int uiColonne;
@@ -88,7 +129,7 @@ CMatrice<TypeMatrice> operator*(CMatrice<TypeMatrice> MATobjet, TypeMatrice fCoe
 
 		for(uiLigne = 1; uiLigne <= MATobjet.MATLireNbLignes(); uiLigne++){ // on initialise à 1 car la ligne 0 d'une matrice n'existe pas et retourne une exception
 			for(uiColonne = 1; uiColonne <= MATobjet.MATLireNbColonnes() ; uiColonne++){
-				MATTemp.MATModifierElement(MATobjet.MATLireElement(uiLigne, uiColonne) * fCoeff, uiLigne, uiColonne);
+				MATTemp.MATModifierElement(MATobjet.MATLireElement(uiLigne, uiColonne) * tpmCoeff, uiLigne, uiColonne);
 			}
 		}
 	}catch(Cexception EXCexception){
@@ -98,8 +139,16 @@ CMatrice<TypeMatrice> operator*(CMatrice<TypeMatrice> MATobjet, TypeMatrice fCoe
 	return MATTemp;
 }
 
+/*********************
+ * Surcharge de l'opérateur / 2 arg
+ * *******************
+ * Entrée : une matrice et un coefficient
+ * Précondition : le coefficient doit être de Type Matrice
+ * Sortie : objet de la classe CMatrice
+ * Postcondition : rien
+**********************/
 template <class TypeMatrice>
-CMatrice<TypeMatrice> operator/(CMatrice<TypeMatrice> MATobjet, TypeMatrice fCoeff)
+CMatrice<TypeMatrice> operator/(CMatrice<TypeMatrice> MATobjet, TypeMatrice tpmCoeff)
 {
 	unsigned int uiLigne;
 	unsigned int uiColonne;
@@ -109,7 +158,7 @@ CMatrice<TypeMatrice> operator/(CMatrice<TypeMatrice> MATobjet, TypeMatrice fCoe
 
 		for(uiLigne = 1; uiLigne <= MATobjet.MATLireNbLignes(); uiLigne++){
 			for(uiColonne = 1; uiColonne <= MATobjet.MATLireNbColonnes() ; uiColonne++)
-				MATTemp.MATModifierElement(MATobjet.MATLireElement(uiLigne, uiColonne)/fCoeff, uiLigne, uiColonne);
+				MATTemp.MATModifierElement(MATobjet.MATLireElement(uiLigne, uiColonne)/tpmCoeff, uiLigne, uiColonne);
 		}
 	}catch(Cexception EXCexception){
 		cerr << EXCexception.EXCLireMessage();
@@ -118,8 +167,16 @@ CMatrice<TypeMatrice> operator/(CMatrice<TypeMatrice> MATobjet, TypeMatrice fCoe
 	return MATTemp;
 }
 
+/*********************
+ * Surcharge de l'opérateur * 2 arg
+ * *******************
+ * Entrée : une matrice et un coefficient
+ * Précondition : le coefficient doit être de Type Matrice
+ * Sortie : objet de la classe CMatrice
+ * Postcondition : rien
+**********************/
 template <class TypeMatrice>
-CMatrice<TypeMatrice> operator*(TypeMatrice fCoeff, CMatrice<TypeMatrice> MATobjet)
+CMatrice<TypeMatrice> operator*(TypeMatrice tpmCoeff, CMatrice<TypeMatrice> MATobjet)
 {
 	unsigned int uiLigne;
 	unsigned int uiColonne;
@@ -130,7 +187,7 @@ CMatrice<TypeMatrice> operator*(TypeMatrice fCoeff, CMatrice<TypeMatrice> MATobj
 
 		for(uiLigne = 1; uiLigne <= MATobjet.MATLireNbLignes(); uiLigne++){ // on initialise à 1 car la ligne 0 d'une matrice n'existe pas et retourne une exception
 			for(uiColonne = 1; uiColonne <= MATobjet.MATLireNbColonnes() ; uiColonne++){
-				MATTemp.MATModifierElement(MATobjet.MATLireElement(uiLigne, uiColonne) * fCoeff, uiLigne, uiColonne);
+				MATTemp.MATModifierElement(MATobjet.MATLireElement(uiLigne, uiColonne) * tpmCoeff, uiLigne, uiColonne);
 			}
 		}
 	}catch(Cexception EXCexception){
@@ -140,8 +197,16 @@ CMatrice<TypeMatrice> operator*(TypeMatrice fCoeff, CMatrice<TypeMatrice> MATobj
 	return MATTemp;
 }
 
+/*********************
+ * Surcharge de l'opérateur / 2 arg
+ * *******************
+ * Entrée : une matrice et un coefficient
+ * Précondition : le coefficient doit être de Type Matrice
+ * Sortie : objet de la classe CMatrice
+ * Postcondition : rien
+**********************/
 template <class TypeMatrice>
-CMatrice<TypeMatrice> operator/(TypeMatrice fCoeff, CMatrice<TypeMatrice> MATobjet)
+CMatrice<TypeMatrice> operator/(TypeMatrice tpmCoeff, CMatrice<TypeMatrice> MATobjet)
 {
 	unsigned int uiLigne;
 	unsigned int uiColonne;
@@ -151,7 +216,7 @@ CMatrice<TypeMatrice> operator/(TypeMatrice fCoeff, CMatrice<TypeMatrice> MATobj
 
 		for(uiLigne = 1; uiLigne <= MATobjet.MATLireNbLignes(); uiLigne++){
 			for(uiColonne = 1; uiColonne <= MATobjet.MATLireNbColonnes() ; uiColonne++)
-				MATTemp.MATModifierElement(MATobjet.MATLireElement(uiLigne, uiColonne)/fCoeff, uiLigne, uiColonne);
+				MATTemp.MATModifierElement(MATobjet.MATLireElement(uiLigne, uiColonne)/tpmCoeff, uiLigne, uiColonne);
 		}
 	}catch(Cexception EXCexception){
 		cerr << EXCexception.EXCLireMessage();

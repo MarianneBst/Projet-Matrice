@@ -6,37 +6,37 @@
  * Constructeur par défaut 0 arg
  * *******************
  * Entrée : rien
- * Nécessite : néant (?) précondition
+ * Précondition : rien
  * Sortie : rien
- * Entraine : inititalisation de l'attribut pcEXCmessage (postcondition)
+ * Postcondition : rien
 **********************/
 Cexception::Cexception()
 {
-	pcEXCmessage = new char[20];//pas d'autre manière ?
+	pcEXCmessage = new char[200];//pas d'autre manière ?
 }
 
 /*********************
  * Constructeur de recopie 1 arg
  * *******************
- * Entrée : référence d'un objet
- * Nécessite : néant (?)
+ * Entrée : objet de la classe Cexception
+ * Précondition : rien
  * Sortie : rien
- * Entraine : inititalisation de l'objet en paramètre
+ * Postcondition : rien
 **********************/
 Cexception::Cexception(Cexception &EXCobjet)
 {
 	this->uiEXCValeur = EXCobjet.EXCLireErreur();
-	pcEXCmessage = new char[20];
+	pcEXCmessage = new char[200];
 	strcpy_s(pcEXCmessage, strlen(EXCobjet.EXCLireMessage()) +1, EXCobjet.EXCLireMessage());
 }
 
 /*********************
- * Constructeur de paramètre 2 args
+ * Constructeur de paramètres 2 arg
  * *******************
- * Entrée : uiValeur et pcMessage
- * Nécessite : néant (?)
+ * Entrée : la valeur correspondant au type d'erreur et le message d'erreur
+ * Précondition : rien
  * Sortie : rien
- * Entraine : l'attribut uiEXCValeur et pcEXCmessage prend les valeurs en paramètre
+ * Postcondition : rien
 **********************/
 Cexception::Cexception(unsigned int uiValeur, char* pcMessage)
 {
@@ -48,11 +48,11 @@ Cexception::Cexception(unsigned int uiValeur, char* pcMessage)
 
 /*********************
  * Destructeur 0 arg
- * *********************
+ * *******************
  * Entrée : rien
- * Nécessite : néant (?)
+ * Précondition : rien
  * Sortie : rien
- * Entraine : supprime l'attribut pcEXCmessage
+ * Postcondition : rien
 **********************/
 Cexception::~Cexception()
 {
@@ -60,12 +60,12 @@ Cexception::~Cexception()
 }
 
 /*********************
- * Méthode getter de l'erreur 0 arg
- * *********************
+ * Accesseur en lecture de la valeur erreur 0 arg
+ * *******************
  * Entrée : rien
- * Nécessite : néant (?)
- * Sortie : l'attribut valeur
- * Entraine :
+ * Précondition : rien
+ * Sortie : valeur du type de l'erreur
+ * Postcondition : rien
 **********************/
 unsigned int Cexception::EXCLireErreur()
 {
@@ -73,12 +73,12 @@ unsigned int Cexception::EXCLireErreur()
 }
 
 /*********************
- * Méthode getter du message 0 arg
- * *********************
+ * Accesseur en lecture du message d'erreur 
+ * *******************
  * Entrée : rien
- * Nécessite : néant (?)
- * Sortie : l'attribut message
- * Entraine :
+ * Précondition : rien
+ * Sortie : message d'erreur
+ * Postcondition : rien
 **********************/
 char * Cexception::EXCLireMessage()
 {
@@ -86,12 +86,12 @@ char * Cexception::EXCLireMessage()
 }
 
 /*********************
- * Méthode setter message 1 arg
- * *********************
- * Entrée : pcMessage
- * Nécessite : néant (?)
+ * Accesseur ecriture du message d'erreur 
+ * *******************
+ * Entrée : message d'erreur
+ * Précondition : rien
  * Sortie : rien
- * Entraine :
+ * Postcondition : rien
 **********************/
 void Cexception::EXCEcrireMessage(char* pcMessage)
 {
@@ -99,12 +99,12 @@ void Cexception::EXCEcrireMessage(char* pcMessage)
 }
 
 /*********************
- * Méthode setter erreur 1 arg
- * *********************
- * Entrée : uiValeur
- * Nécessite : néant (?)
+ * Accesseur ecriture de la valeur du type d'erreur 
+ * *******************
+ * Entrée : valeur d'erreur
+ * Précondition : rien
  * Sortie : rien
- * Entraine :
+ * Postcondition : rien
 **********************/
 void Cexception::EXCEcrireErreur(unsigned int uiValeur)
 {

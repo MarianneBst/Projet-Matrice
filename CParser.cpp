@@ -2,7 +2,7 @@
 #include <fstream>
 
 #include "CParser.h"
-#include "CException.h";
+#include "Cexception.h"
 
 using namespace std;
 
@@ -91,7 +91,7 @@ void CParser::PARLireFichier(char* pcPath)
 
 		if(strstr(line,pcDouble)==NULL) //Si dans la même ligne on ne trouve pas "double"
 			{
-				CException EXCObjet(10,"La matrice n'est pas de type double"); //Alors on jète une exception
+				Cexception EXCObjet(10,"La matrice n'est pas de type double"); //Alors on jète une exception
 				throw EXCObjet;
 			}
 		//Seek du curseur au début du fichier.
@@ -132,7 +132,7 @@ void CParser::PARLireFichier(char* pcPath)
 		}
 		else
 		{
-			CException EXCObjet(11,"Le nombre de ligne n'est pas un nombre."); //Alors on jète une exception
+			Cexception EXCObjet(11,"Le nombre de ligne n'est pas un nombre."); //Alors on jète une exception
 			throw EXCObjet;
 		}
 		free(getterTemp);
@@ -175,7 +175,7 @@ void CParser::PARLireFichier(char* pcPath)
 		}
 		else
 		{
-			CException EXCObjet(12,"Le nombre de colonnes n'est pas un nombre."); //Alors on jète une exception
+			Cexception EXCObjet(12,"Le nombre de colonnes n'est pas un nombre."); //Alors on jète une exception
 			throw EXCObjet;
 		}
 		free(getterTemp);
@@ -210,7 +210,7 @@ void CParser::PARLireFichier(char* pcPath)
 				//flux dans une var
 				if(!(file >> dElementMatrice)) //Si l'élément n'est pas un double
 				{
-					CException EXCObjet(13,"L'élément n'est pas un double.");
+					Cexception EXCObjet(13,"L'élément n'est pas un double.");
 					throw EXCObjet;
 				}
 				
@@ -226,7 +226,7 @@ void CParser::PARLireFichier(char* pcPath)
 				{
 					if(line[iCpt]!=' ' || line[iCpt]!='\t') //Si il y a autre chose qu'un espace ou qu'une tabulation
 					{
-						CException EXCObjet(14,"Il y a plus d'élément que de colonnes"); //Alors il y a une erreur
+						Cexception EXCObjet(14,"Il y a plus d'élément que de colonnes"); //Alors il y a une erreur
 						throw EXCObjet;
 					}
 					else
@@ -237,7 +237,7 @@ void CParser::PARLireFichier(char* pcPath)
 		file >> testCrochet;
 		if(testCrochet!=']')
 		{
-			CException EXCObjet(15,"Trop de ligne ou caractère de fin incorrect"); //Alors il y a une erreur
+			Cexception EXCObjet(15,"Trop de ligne ou caractère de fin incorrect"); //Alors il y a une erreur
 			throw EXCObjet;
 		}
 	

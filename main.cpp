@@ -1,10 +1,8 @@
 #include "CMatrice.h"
-<<<<<<< HEAD
-#include "COperations.h"
-#include "CException.h"
+//<<<<<<< HEAD
 #include "CParser.h"
-=======
->>>>>>> 0f7588f5cdce74bbb1210af8660928313df55c25
+//=======
+//>>>>>>> 0f7588f5cdce74bbb1210af8660928313df55c25
 #include <stdio.h>
 
 using namespace std;
@@ -13,7 +11,6 @@ int main(int argc, char* argv[])
 {
 	//Création des matrice int 3x3 M1 (nulle) et M2 (123456789)
 	cout << "Matrice nulle : " << endl;
-	CMatrice<double> M30();
 	CMatrice<int> M1(3,3);
 	M1.MATAfficherMatrice();
 	CMatrice<int> M2(M1);
@@ -27,8 +24,6 @@ int main(int argc, char* argv[])
 	M2.MATModifierElement(7,3,1);
 	M2.MATModifierElement(4,2,1);
 	
-	M1.MATAfficherMatrice();
-	
 	cout << "Matrice M2 : " << endl;
 	M2.MATAfficherMatrice();
 
@@ -41,6 +36,12 @@ int main(int argc, char* argv[])
 	cout << "Test 1 : Good" <<endl;
 	free(P1.getPpdPARMatrice());
 
+	//début de l'algorythme
+	int c;
+	cout << "Saisir une valeur" << endl;
+	cin >> c;
+	cout << "Multiplication de M2 par ";
+	cout << c ; cout << endl;
 	CMatrice<int> M3(c * M2);
 	cout << "Matrice M3 " << endl;
 	M3.MATAfficherMatrice();
