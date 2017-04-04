@@ -1,8 +1,5 @@
 #include "CMatrice.h"
-//<<<<<<< HEAD
 #include "CParser.h"
-//=======
-//>>>>>>> 0f7588f5cdce74bbb1210af8660928313df55c25
 #include <stdio.h>
 
 using namespace std;
@@ -11,9 +8,10 @@ int main(int argc, char* argv[])
 {
 	//Création des matrice int 3x3 M1 (nulle) et M2 (123456789)
 	cout << "Matrice nulle : " << endl;
-	CMatrice<int> M1(3,3);
+	CMatrice<double> M1(3,3);
+	CMatrice<double> M35(3,3);
 	M1.MATAfficherMatrice();
-	CMatrice<int> M2(M1);
+	CMatrice<double> M2(M1);
 	M2.MATModifierElement(2,1,2);
 	M2.MATModifierElement(3,1,3);
 	M2.MATModifierElement(5,2,2);
@@ -23,50 +21,50 @@ int main(int argc, char* argv[])
 	M2.MATModifierElement(9,3,3);
 	M2.MATModifierElement(7,3,1);
 	M2.MATModifierElement(4,2,1);
+	M35 = M1 + M2;
+	cout << "M1 + M2" << endl;
+	M35.MATAfficherMatrice();
 	
-	cout << "Matrice M2 : " << endl;
-	M2.MATAfficherMatrice();
+	M1.MATModifierElement(14,1,2);
+	cout << "Matrice M1 : " << endl;
+	M1.MATAfficherMatrice();
 
-	CMatrice<int> Mt(M2.MATTransposee());
-	cout << "Matrice transposée de M2 : " << endl;
-	Mt.MATAfficherMatrice();
+	//CParser P1;
+	//P1.PARLireFichier("test1.txt");
+	//cout << "Test 1 : Good" <<endl;
+	//free(P1.getPpdPARMatrice());
 
-	CParser P1;
-	P1.PARLireFichier("test1.txt");
-	cout << "Test 1 : Good" <<endl;
-	free(P1.getPpdPARMatrice());
-
-	//début de l'algorythme
-	int c;
+	//début de l'algorithme
+	/*double c;
 	cout << "Saisir une valeur" << endl;
 	cin >> c;
 	cout << "Multiplication de M2 par ";
 	cout << c ; cout << endl;
-	CMatrice<int> M3(c * M2);
+	CMatrice<double> M3(c * M2);
 	cout << "Matrice M3 " << endl;
 	M3.MATAfficherMatrice();
 	cout << "Soustraction de M2 par M3 " << endl;
-	CMatrice<int> M4(M2 - M3);
+	CMatrice<double> M4(M2 - M3);
 	M4.MATAfficherMatrice();
 	cout << "Addition de M2 par M3 " << endl;
-	CMatrice<int> M5(M2 + M3);
+	CMatrice<double> M5(M2 + M3);
 	M5.MATAfficherMatrice();
 	cout << "Division de M2 par ";
 	cout << c ; cout << endl;
-	CMatrice<int> M6(c / M2);
+	CMatrice<double> M6(c / M2);
 	cout << "Matrice M6 " << endl;
 	M6.MATAfficherMatrice();
-	CMatrice<int> M7(3,3);
+	CMatrice<double> M7(3,3);
 	M7.MATModifierElement(1,1,1);
 	M7.MATModifierElement(1,2,2);
 	M7.MATModifierElement(1,3,3);
 	cout << "Matrice M7 " << endl;
 	M7.MATAfficherMatrice();
 	cout << "M7 * M2" << endl;
-	CMatrice<int> M8(M7 * M2);
+	CMatrice<double> M8(M7 * M2);
 	M8.MATAfficherMatrice();
-	CMatrice<int> M9(M2 + M3 + M7);
-	M9.MATAfficherMatrice();
+	CMatrice<double> M9(M2 + M3 + M7);
+	M9.MATAfficherMatrice();*/
 
 	return 0;
 }

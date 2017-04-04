@@ -15,7 +15,7 @@ CMatrice<TypeMatrice> operator+(CMatrice<TypeMatrice> MATParamA, CMatrice<TypeMa
 		Cexception EXCobjet(2, "Addition des matrices impossible");
 		throw EXCobjet;
 	}
-	CMatrice<int> MTemp(MATParamA.MATLireNbLignes(),MATParamA.MATLireNbColonnes());
+	CMatrice<TypeMatrice> MTemp(MATParamA.MATLireNbLignes(),MATParamA.MATLireNbColonnes());
 	unsigned int uiCptColonnes;
 	unsigned int uiCptLignes;
 	try{
@@ -43,7 +43,7 @@ template <class TypeMatrice>
 CMatrice<TypeMatrice> operator-(CMatrice<TypeMatrice> MATParamA, CMatrice<TypeMatrice> MATParamB)
 {
 	
-	CMatrice<int> MTemp(MATParamA.MATLireNbLignes(),MATParamA.MATLireNbColonnes());
+	CMatrice<TypeMatrice> MTemp(MATParamA.MATLireNbLignes(),MATParamA.MATLireNbColonnes());
 	unsigned int uiCptColonnes;
 	unsigned int uiCptLignes;
 
@@ -81,7 +81,7 @@ CMatrice<TypeMatrice> operator*(CMatrice<TypeMatrice> MATParamA, CMatrice<TypeMa
 	unsigned int uiCptLignes;
 	unsigned int uiCptSommes;
 	TypeMatrice tpmSomme;
-	CMatrice<int> MTemp(MATParamA.MATLireNbLignes(),MATParamB.MATLireNbColonnes());
+	CMatrice<TypeMatrice> MTemp(MATParamA.MATLireNbLignes(),MATParamB.MATLireNbColonnes());
 
 	if(MATParamA.MATLireNbColonnes() != MATParamB.MATLireNbLignes()){
 		Cexception EXCobjet(2, "Multiplication des matrices impossible");
