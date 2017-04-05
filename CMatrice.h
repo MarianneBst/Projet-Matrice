@@ -3,7 +3,7 @@
 
 #include <stdio.h>
 #include <iostream>
-class CParser;
+
 
 template <class TypeMatrice>
 class CMatrice
@@ -35,7 +35,7 @@ class CMatrice
 **********************/
 		CMatrice<TypeMatrice>(CMatrice<TypeMatrice> &MATobjet);
 /*********************
- * Constructeur de paramètres 2 args
+ * Constructeur de paramètres 2 arg
  * *******************
  * Entrée : le nombre de lignes et de colonnes
  * Précondition : rien
@@ -43,16 +43,6 @@ class CMatrice
  * Postcondition : rien
 **********************/
 		CMatrice<TypeMatrice>(unsigned int uiNbLignes, unsigned int uiNbColonnes);
-
-/*********************
- * Constructeur de paramètres 1 arg
- * *******************
- * Entrée : objet CParser
- * Précondition : rien
- * Sortie : rien
- * Postcondition : rien
-**********************/
-		CMatrice<TypeMatrice>(CParser &PARObjet);
 
 		/* *********** Destructeur * *********/
 /*********************
@@ -125,6 +115,14 @@ class CMatrice
 **********************/
 		/*CMatrice<TypeMatrice> MATTransposee();*/
 
+/*********************
+ * Surcharge de l'opérateur = 0 arg
+ * *******************
+ * Entrée : un objet de la classe CMatrice
+ * Précondition : rien
+ * Sortie : rien
+ * Postcondition : rien
+**********************/
 		void operator=(CMatrice<TypeMatrice> &MATParam);
 
 };
