@@ -153,17 +153,25 @@ void CMatrice<TypeMatrice>::MATModifierElement(TypeMatrice tpmElement, unsigned 
 // surcharge du =
 template <typename TypeMatrice>
 void CMatrice<TypeMatrice>::operator=(CMatrice<TypeMatrice> &MATParam){
+	
+	//On détruit l'objet
 	unsigned int uiLigne;
+
+	for(uiLigne = 0; uiLigne < uiMATNbLignes; uiLigne++){
+		delete[](pptpmMATMatrice[uiLigne]);
+	}
+	delete[](pptpmMATMatrice);
+	
 	unsigned int uiColonne;
 	
-	if(uiMATNbLignes != MATParam.MATLireNbLignes() || uiMATNbColonnes != MATParam.MATLireNbColonnes()){
-		Cexception EXCobjet(2, "Les matrices ne sont pas de même taille");
-		throw EXCobjet;
-	}
-
-	for(uiLigne = 1; uiLigne <= uiMATNbLignes; uiLigne++){
+	uiMATNbColonnes = MATParam.MATLireNbLignes();
+	uiMATNbLignes = MATParam.MATLireNbColonnes();
+	
+	pptpmMATMatrice = new TypeMatrice* [MATParam.MATLireNbLignes()];
+	for(uiLigne = 0; uiLigne < MATParam.MATLireNbLignes(); uiLigne++){
+		pptpmMATMatrice[uiLigne] = new TypeMatrice[MATParam.MATLireNbColonnes()];
 		for(uiColonne = 1; uiColonne <= uiMATNbColonnes;uiColonne++){
-			MATModifierElement(MATParam.MATLireElement(uiLigne,uiColonne), uiLigne, uiColonne);
+			MATModifierElement(MATParam.MATLireElement(uiLigne+1,uiColonne), uiLigne+1, uiColonne);
 		}
 	}
 	

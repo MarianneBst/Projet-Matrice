@@ -83,7 +83,6 @@ void CParser::PARLireFichier(char* pcPath)
 		PARupperString(line);
 		
 /********************* TYPE MATRICE *********************/
-		cout << "Debut TP" << endl;
 		while(strstr(line,pcTypeMatrice)==NULL) //tant que "TypeMatrice" n'est pas dans la ligne, on continue.
 		{
 			file.getline(line,1024);
@@ -100,10 +99,8 @@ void CParser::PARLireFichier(char* pcPath)
 
 		file.getline(line,1024);
 		PARupperString(line);
-		cout << "Fin TP" << endl;
 
 /********************* LIGNES *********************/
-		cout << "Debut Lignes" << endl;
 		while(strstr(line,pcNbLignes)==NULL) //tant que "NbLignes" n'est pas dans la ligne, on continue.
 		{
 			file.getline(line,1024);
@@ -140,10 +137,8 @@ void CParser::PARLireFichier(char* pcPath)
 		}
 		free(getterTemp);
 		file.seekg(0);
-		cout << "Fin lignes" << endl;
 
 /********************* COLONNES *********************/
-		cout << "Debut colonnes" << endl;
 		file.getline(line,1024);
 		PARupperString(line);
 		iCpt=0;
@@ -186,10 +181,8 @@ void CParser::PARLireFichier(char* pcPath)
 		free(getterTemp);
 		file.seekg(0);
 
-		cout << "fin colonnes" << endl;
 
 /********************* MATRICE *********************/
-		cout << "Debut Matrice" << endl;
 		ppdPARMatrice = new double* [uiPARNbLignes];
 		for(uiCptLignes = 0; uiCptLignes < uiPARNbLignes; uiCptLignes++)
 			ppdPARMatrice[uiCptLignes] = new double[uiPARNbColonnes];
@@ -248,7 +241,6 @@ void CParser::PARLireFichier(char* pcPath)
 			//Cexception EXCObjet(15,"Trop de ligne ou caractère de fin incorrect"); //Alors il y a une erreur
 			//throw EXCObjet;
 		}
-		cout << "Fin Matrice" << endl;
 	
 	}
 
