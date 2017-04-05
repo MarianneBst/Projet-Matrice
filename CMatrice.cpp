@@ -3,7 +3,15 @@
 
 
 /* **********constructeurs **********/
-//par défaut
+
+/*********************
+ * Constructeur par défaut 0 arg
+ * *******************
+ * Entrée : rien
+ * Précondition : rien
+ * Sortie : rien
+ * Postcondition : rien
+**********************/
 template <class TypeMatrice>
 CMatrice<TypeMatrice>::CMatrice()
 {
@@ -14,7 +22,14 @@ CMatrice<TypeMatrice>::CMatrice()
 	pptpmMATMatrice[0][0] = 0;
 }
 
-//de paramètres
+/*********************
+ * Constructeur de paramètres 2 arg
+ * *******************
+ * Entrée : le nombre de lignes et de colonnes
+ * Précondition : rien
+ * Sortie : rien
+ * Postcondition : rien
+**********************/
 template <class TypeMatrice>
 CMatrice<TypeMatrice>::CMatrice(unsigned int uiNbLignes, unsigned int uiNbColonnes){
 	unsigned int uiLigne;
@@ -30,7 +45,14 @@ CMatrice<TypeMatrice>::CMatrice(unsigned int uiNbLignes, unsigned int uiNbColonn
 	}
 }
 
-//de recopie
+/*********************
+ * Constructeur de recopie 1 arg
+ * *******************
+ * Entrée : objet de la classe CMatrice
+ * Précondition : rien
+ * Sortie : rien
+ * Postcondition : rien
+**********************/
 template <class TypeMatrice>
 CMatrice<TypeMatrice>::CMatrice(CMatrice<TypeMatrice> &MATobjet){
 	unsigned int uiLigne;
@@ -48,26 +70,17 @@ CMatrice<TypeMatrice>::CMatrice(CMatrice<TypeMatrice> &MATobjet){
 	}
 	
 }
-//Parser
-template <class TypeMatrice>
-CMatrice<TypeMatrice>::CMatrice(CParser &PARObjet)
-{
-	unsigned int uiLigne;
-	unsigned int uiColonne;
 
-	uiMATNbColonnes = PARObjet.getUiPARNbColonnes();
-	uiMATNbLignes = PARObjet.getUiPARNbLignes();
-	
-	pptpmMATMatrice = new TypeMatrice* [PARObjet.getUiPARNbLignes()];
-	for(uiLigne = 0; uiLigne < PARObjet.getUiPARNbLignes(); uiLigne++){
-		pptpmMATMatrice[uiLigne] = new TypeMatrice[PARObjet.getUiPARNbColonnes()];
-		for(uiColonne = 0; uiColonne < PARObjet.getUiPARNbColonnes(); uiColonne++){
-			pptpmMATMatrice[uiLigne][uiColonne] = PARObjet.getPpdPARMatrice()[uiLigne][uiColonne];
-		}
-	}
-}
+/* ************** Destructeurs **********/
 
-/* ************** Destructeur **********/
+/*********************
+ * Destructeur 0 arg
+ * *******************
+ * Entrée : rien
+ * Précondition : rien
+ * Sortie : rien
+ * Postcondition : rien
+**********************/
 template <class TypeMatrice>
 CMatrice<TypeMatrice>::~CMatrice(){
 	unsigned int uiLigne;
@@ -80,6 +93,15 @@ CMatrice<TypeMatrice>::~CMatrice(){
 
 
 /* ************Getter *************/
+
+/*********************
+ * Accesseur en lecture de la matrice 0 arg
+ * *******************
+ * Entrée : rien
+ * Précondition : rien
+ * Sortie : la matrice
+ * Postcondition : rien
+**********************/
 template <typename TypeMatrice>
 void CMatrice<TypeMatrice>::MATAfficherMatrice()
 {
@@ -95,17 +117,43 @@ void CMatrice<TypeMatrice>::MATAfficherMatrice()
 		cout << endl;
 	}
 }
+
+/*********************
+ * Accesseur en lecture du nombre de lignes 0 arg
+ * *******************
+ * Entrée : rien
+ * Précondition : rien
+ * Sortie : nombre de lignes de la matrice
+ * Postcondition : rien
+**********************/
 template <class TypeMatrice>
 unsigned int CMatrice<TypeMatrice>::MATLireNbLignes()
 {
 	return uiMATNbLignes;
 }
+
+/*********************
+ * Accesseur en lecture du nombre de colonnes 0 arg
+ * *******************
+ * Entrée : rien
+ * Précondition : rien
+ * Sortie : nombre de colonnes de la matrice
+ * Postcondition : rien
+**********************/
 template <class TypeMatrice>
 unsigned int CMatrice<TypeMatrice>::MATLireNbColonnes()
 {
 	return uiMATNbColonnes;
 }
 
+/*********************
+ * Accesseur en lecture d'un élément de la matrice 2 arg
+ * *******************
+ * Entrée : le numéro de la ligne et de la colonne
+ * Précondition : Les numéros de lignes commencent à 1 et ne doivent pas dépasser la taille de la matrice
+ * Sortie : l'élément
+ * Postcondition : rien
+**********************/
 template <class TypeMatrice>
 TypeMatrice CMatrice<TypeMatrice>::MATLireElement(unsigned int uinumLigne, unsigned int uinumColonne){
 	if(uinumLigne == 0 || uinumColonne == 0){
@@ -120,6 +168,15 @@ TypeMatrice CMatrice<TypeMatrice>::MATLireElement(unsigned int uinumLigne, unsig
 }
 
 /* *************** Setter ************/
+
+/*********************
+ * Accesseur en écriture d'un élément de la matrice 3 arg
+ * *******************
+ * Entrée : le nouvel élément le numéro de la ligne et de la colonne
+ * Précondition : Les numéros de lignes commencent à 1 et ne doivent pas dépasser la taille de la matrice
+ * Sortie : nombre de colonnes de la matrice
+ * Postcondition : rien
+**********************/
 template <class TypeMatrice>
 void CMatrice<TypeMatrice>::MATModifierElement(TypeMatrice tpmElement, unsigned int uinumLigne, unsigned int uinumColonne){
 	if(uinumLigne == 0 || uinumColonne == 0){
@@ -134,6 +191,15 @@ void CMatrice<TypeMatrice>::MATModifierElement(TypeMatrice tpmElement, unsigned 
 }
 
 /* *************Operations **********/
+
+/*********************
+ * Transposée d'une matrice 0 arg
+ * *******************
+ * Entrée : rien
+ * Précondition : rien
+ * Sortie : la matrice transposée
+ * Postcondition : rien
+**********************/
 
  // Transposée
 //template <class TypeMatrice>
@@ -150,7 +216,14 @@ void CMatrice<TypeMatrice>::MATModifierElement(TypeMatrice tpmElement, unsigned 
 //	return MTemp;
 //}
 
-// surcharge du =
+/*********************
+ * Surcharge de l'opérateur = 0 arg
+ * *******************
+ * Entrée : un objet de la classe CMatrice
+ * Précondition : rien
+ * Sortie : rien
+ * Postcondition : rien
+**********************/
 template <typename TypeMatrice>
 void CMatrice<TypeMatrice>::operator=(CMatrice<TypeMatrice> &MATParam){
 	unsigned int uiLigne;

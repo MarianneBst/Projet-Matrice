@@ -69,7 +69,7 @@ void CParser::PARLireFichier(char* pcPath)
 		char line[1024]; //Chaine lue
 		int iCpt=0; //Compteur de parcours de chaine
 		int iCptIntermediaire=1; //Pour pouvoir l'utiliser pour le malloc
-		char* getterTemp=(char*)malloc(0); // Va servir à récupérer le nombre de lignes et de colonnes.
+		char* getterTemp=NULL; // Va servir à récupérer le nombre de lignes et de colonnes.
 		char pcTypeMatrice[12]="TYPEMATRICE";
 		char pcDouble[7]="DOUBLE";
 		char pcNbColonnes[11]="NBCOLONNES";
@@ -83,7 +83,6 @@ void CParser::PARLireFichier(char* pcPath)
 		PARupperString(line);
 		
 /********************* TYPE MATRICE *********************/
-		cout << "Debut TP" << endl;
 		while(strstr(line,pcTypeMatrice)==NULL) //tant que "TypeMatrice" n'est pas dans la ligne, on continue.
 		{
 			file.getline(line,1024);
@@ -92,18 +91,16 @@ void CParser::PARLireFichier(char* pcPath)
 
 		if(strstr(line,pcDouble)==NULL) //Si dans la même ligne on ne trouve pas "double"
 			{
-				//Cexception EXCObjet(10,"La matrice n'est pas de type double"); //Alors on jète une exception
-				//throw EXCObjet;
+				Cexception EXCObjet(10,"La matrice n'est pas de type double"); //Alors on jète une exception
+				throw EXCObjet;
 			}
 		//Seek du curseur au début du fichier.
 		file.seekg(0);
 
 		file.getline(line,1024);
 		PARupperString(line);
-		cout << "Fin TP" << endl;
 
 /********************* LIGNES *********************/
-		cout << "Debut Lignes" << endl;
 		while(strstr(line,pcNbLignes)==NULL) //tant que "NbLignes" n'est pas dans la ligne, on continue.
 		{
 			file.getline(line,1024);
@@ -135,15 +132,13 @@ void CParser::PARLireFichier(char* pcPath)
 		}
 		else
 		{
-			//Cexception EXCObjet(11,"Le nombre de ligne n'est pas un nombre."); //Alors on jète une exception
-			//throw EXCObjet;
+			Cexception EXCObjet(11,"Le nombre de ligne n'est pas un nombre."); //Alors on jète une exception
+			throw EXCObjet;
 		}
 		free(getterTemp);
 		file.seekg(0);
-		cout << "Fin lignes" << endl;
 
 /********************* COLONNES *********************/
-		cout << "Debut colonnes" << endl;
 		file.getline(line,1024);
 		PARupperString(line);
 		iCpt=0;
@@ -167,7 +162,7 @@ void CParser::PARLireFichier(char* pcPath)
 		{
 			while(line[iCpt]!=' ' && line[iCpt]!='\0')
 			{
-				getterTemp=(char*)realloc(getterTemp,iCptIntermediaire);
+				realloc(getterTemp,iCptIntermediaire);
 				getterTemp[iCptIntermediaire-1]=line[iCpt];
 				iCpt++;
 				iCptIntermediaire++;
@@ -180,16 +175,13 @@ void CParser::PARLireFichier(char* pcPath)
 		}
 		else
 		{
-			//Cexception EXCObjet(12,"Le nombre de colonnes n'est pas un nombre."); //Alors on jète une exception
-			//throw EXCObjet;
+			Cexception EXCObjet(12,"Le nombre de colonnes n'est pas un nombre."); //Alors on jète une exception
+			throw EXCObjet;
 		}
 		free(getterTemp);
 		file.seekg(0);
 
-		cout << "fin colonnes" << endl;
-
 /********************* MATRICE *********************/
-		cout << "Debut Matrice" << endl;
 		ppdPARMatrice = new double* [uiPARNbLignes];
 		for(uiCptLignes = 0; uiCptLignes < uiPARNbLignes; uiCptLignes++)
 			ppdPARMatrice[uiCptLignes] = new double[uiPARNbColonnes];
@@ -218,8 +210,8 @@ void CParser::PARLireFichier(char* pcPath)
 				//flux dans une var
 				if(!(file >> dElementMatrice)) //Si l'élément n'est pas un double
 				{
-					/*Cexception EXCObjet(13,"L'élément n'est pas un double.");
-					throw EXCObjet;*/
+					Cexception EXCObjet(13,"L'élément n'est pas un double.");
+					throw EXCObjet;
 				}
 				
 				else
@@ -234,8 +226,8 @@ void CParser::PARLireFichier(char* pcPath)
 				{
 					if(line[iCpt]!=' ' || line[iCpt]!='\t') //Si il y a autre chose qu'un espace ou qu'une tabulation
 					{
-						//Cexception EXCObjet(14,"Il y a plus d'élément que de colonnes"); //Alors il y a une erreur
-						//throw EXCObjet;
+						Cexception EXCObjet(14,"Il y a plus d'élément que de colonnes"); //Alors il y a une erreur
+						throw EXCObjet;
 					}
 					else
 						iCpt++; //Sinon on continue de parcourir la chaine.
@@ -245,10 +237,9 @@ void CParser::PARLireFichier(char* pcPath)
 		file >> testCrochet;
 		if(testCrochet!=']')
 		{
-			//Cexception EXCObjet(15,"Trop de ligne ou caractère de fin incorrect"); //Alors il y a une erreur
-			//throw EXCObjet;
+			Cexception EXCObjet(15,"Trop de ligne ou caractère de fin incorrect"); //Alors il y a une erreur
+			throw EXCObjet;
 		}
-		cout << "Fin Matrice" << endl;
 	
 	}
 
